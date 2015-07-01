@@ -13,38 +13,38 @@ Paste lines after this line
 ````html
 <script src="last-tab.js"></script>
 ````
-![](/screenshots/popup-tabs.png?raw=true)
+![](http://i.imgur.com/uKhTpOQ.gif)
 
 ###Click active tab to go to top of page
 ````html
 <script src="tab-to-top.js"></script>
 ````
-![](/screenshots/addressbar.png?raw=true)
+![](http://i.imgur.com/QWoViex.gif)
 
 ###Right click on plus-button to paste and go
 ````html
 <script src="click-and-go.js"></script>
 ````
-![](/screenshots/white.png?raw=true)
+![](http://i.imgur.com/J0BzhOM.gif)
 
 ###Show url of links without status bar
 ````html
 <link rel="stylesheet" href="status-bar.css" />
 ````
-![](/screenshots/menu.png?raw=true)
+![](http://i.imgur.com/JktJase.png)
 
 ###Address-bar in header
 ````html
 <link rel="stylesheet" href="header-viv-button.css" />
 ````
-![](/screenshots/menu.png?raw=true)
+![](http://i.imgur.com/PJihSCw.png)
 
 ````html
 <link rel="stylesheet" href="header-menu-rus.css" />
 ````
-![](/screenshots/menu.png?raw=true)
+![](http://i.imgur.com/uBi0jYx.png)
 
 ````html
 <link rel="stylesheet" href="header-menu-eng.css" />
 ````
-![](/screenshots/menu.png?raw=true)
+![](http://i.imgur.com/80gnMqS.png)

@@ -1,0 +1,45 @@
+/** Совмещаем заголовок вместе с адресбар **/
+#header {
+    min-height: 2px !important;
+    height: 2px !important;
+    z-index: auto !important;
+}
+
+.win .vivaldi {
+    color: #fff;
+    position: absolute;
+    top: 5px;
+    left: 98px;
+}
+
+.vivaldi+#tabs-container.top {
+    border-bottom: 1px solid;
+    position: absolute;
+    top: 62px;
+    width: 100%;
+    z-index: 1 !important;
+}
+
+#tabs-container.bottom #tabs, #tabs-container.top #tabs {
+    max-height: 30px !important;
+}
+
+.toolbar.toolbar-addressbar {
+    padding-right: 100px;
+}
+
+.addressfield {	margin-left: 40px !important; }
+
+.button-toolbar {
+    position: relative !important;
+    left: 30px !important;
+}
+
+.bookmark-bar { margin-bottom: 37px; }
+
+.vivaldi { z-index: 3; }
+
+.window-buttongroup { z-index: 2; }
+
+.home,.rewind,.next,#pagetitle{display:none}
+/********************/

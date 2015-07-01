@@ -16,33 +16,31 @@ var dispatchMouseEvent = function(target, var_args) {
     target.dispatchEvent(e);
 };
 
-browser.addEventListener('contextmenu',function(e) {
-    for (var i = 0; i < e.path.length; i++) {
-        //Area near square
-        if (e.target.className.toString().indexOf('newtab') > -1) {
-            isItMouse = true;
-            document.execCommand('paste');
-            return;
-        }
-        //Plus-symbol
-        if (e.target.parentNode.parentNode.className.indexOf('newtab') > -1) {
-            isItMouse = true;
-            hiddenInput.style.display = "block";
-            hiddenInput.focus();
-            document.execCommand('paste');
-            return;
-        }
-        //Square
-        if (e.target.getTotalLength() > 0) { // 104 — length of new tab Button SVG
-            isItMouse = true;
-            hiddenInput.style.display = "block";
-            hiddenInput.focus();
-            dispatchMouseEvent(document.body.querySelector('.button-tabbar.newtab'), 'contextmenu', true, true);
-            //document.execCommand('paste');
-            return;
-        }
+browser.addEventListener('contextmenu', function(e) {
+    //Area near square
+    if (e.target.className.toString().indexOf('newtab') > -1) {
+        isItMouse = true;
+        document.execCommand('paste');
+        return;
+    }
+    //Plus-symbol
+    if (e.target.parentNode.parentNode.className.indexOf('newtab') > -1) {
+        initPaste();
+        return;
+    }
+    //Square
+    if (e.target.getTotalLength() > 0) { // 104 — length of new tab Button SVG
+        initPaste();
+        return;
     }
 });
+
+function initPaste() {
+    isItMouse = true;
+    hiddenInput.style.display = "block";
+    hiddenInput.focus();
+    document.execCommand('paste');
+}
 
 document.addEventListener('paste',function(e) {
     if (isItMouse) {
@@ -73,12 +71,12 @@ document.addEventListener('paste',function(e) {
     }
 );
 //Is it url?
+var patternUrl = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?/#]\S*)?$/i;
+var patternUrlWithout = /^(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})).?)(?::\d{2,5})?(?:[/?/#]\S*)?$/i;
 function checkUrl(str) {
-  var pattern = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?/#]\S*)?$/i;
-  return pattern.test(str);
+    return patternUrl.test(str);
 }
 //Is it url without protocol?
-function checkUrlWithoutProtocol(s) {    
-      var regexp = /^(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})).?)(?::\d{2,5})?(?:[/?/#]\S*)?$/i;
-      return regexp.test(s);    
+function checkUrlWithoutProtocol(str) {    
+    return patternUrlWithout.test(str);    
 }

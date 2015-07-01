@@ -1,7 +1,8 @@
-// Right click and go
+// Right click on plus-button to paste and go
 var browser=document.body.querySelector('#browser');
-var isItMouse = false;
+var isItMouse = false; // Exclude responses from keyboard
 
+//Tweak for paste in this input-field
 var hiddenInput = document.createElement("input");
 hiddenInput.type = "text";
 browser.appendChild(hiddenInput);
@@ -15,14 +16,15 @@ var dispatchMouseEvent = function(target, var_args) {
     target.dispatchEvent(e);
 };
 
-
 browser.addEventListener('contextmenu',function(e) {
     for (var i = 0; i < e.path.length; i++) {
+        //Area near square
         if (e.target.className.toString().indexOf('newtab') > -1) {
             isItMouse = true;
             document.execCommand('paste');
             return;
         }
+        //Plus-symbol
         if (e.target.parentNode.parentNode.className.indexOf('newtab') > -1) {
             isItMouse = true;
             hiddenInput.style.display = "block";
@@ -30,6 +32,7 @@ browser.addEventListener('contextmenu',function(e) {
             document.execCommand('paste');
             return;
         }
+        //Square
         if (e.target.getTotalLength() > 0) { // 104 — length of new tab Button SVG
             isItMouse = true;
             hiddenInput.style.display = "block";
@@ -45,12 +48,12 @@ document.addEventListener('paste',function(e) {
     if (isItMouse) {
         isItMouse = false;
         var url = e.clipboardData.getData('text/plain');
-        hiddenInput.style.display = "none";
+        hiddenInput.style.display = "none"; //hide input-field for pasting
 
         var re = new RegExp('\\r\\n', 'g'); // Delete newline characters
         url = url.replace(re, '');
-
-    //	var searchEngine = 'https://google.com/webhp?hl=ru#hl=ru&q='; // Search engine
+        // Search engines
+    //	var searchEngine = 'https://google.com/webhp?hl=ru#hl=ru&q='; 
     //	var searchEngine = 'http://yandex.ru/search/?text=';
         var searchEngine = 'https://duckduckgo.com/?q=';
         var active = browser.querySelector('.tab.active');
@@ -69,12 +72,12 @@ document.addEventListener('paste',function(e) {
         console.log(url)}
     }
 );
-
+//Is it url?
 function checkUrl(str) {
   var pattern = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?/#]\S*)?$/i;
   return pattern.test(str);
 }
-
+//Is it url without protocol?
 function checkUrlWithoutProtocol(s) {    
       var regexp = /^(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,3})).?)(?::\d{2,5})?(?:[/?/#]\S*)?$/i;
       return regexp.test(s);    

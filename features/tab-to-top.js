@@ -1,5 +1,5 @@
 // Click on active tab to scroll top
-var browser=document.body.querySelector('#browser');
+var browser = document.body.querySelector('#browser');
 browser.addEventListener('click', function(e){
     for (var i = 0; i < e.path.length; i++) {
         if (e.path[i].className.indexOf('active') > -1) {

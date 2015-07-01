@@ -1,0 +1,37 @@
+#header {
+min-height: 2px !important;
+z-index: auto !important;
+}
+
+.win .topmenu {
+color: #fff;
+position: absolute;
+top: 5px;
+left: 0px;
+}
+
+.topmenu+#tabs-container.top {
+border-bottom: 1px solid;
+position: absolute;
+top: 62px;
+width: 100%;
+z-index: 1 !important;
+}
+
+#tabs-container.bottom #tabs, #tabs-container.top #tabs {
+height: 30px !important;
+}
+
+.toolbar.toolbar-addressbar {
+padding-right: 100px;
+}
+
+.button-toolbar.back{margin-left: 270px}
+
+.home,.rewind,.next,#pagetitle{display:none}
+
+.addressfield { margin-left: 3px !important; }
+
+.bookmark-bar { margin-bottom:0px; }
+
+.window-buttongroup { z-index: 2; }

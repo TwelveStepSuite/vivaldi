@@ -24,7 +24,7 @@ browser.addEventListener('contextmenu', function(e) {
         return;
     }
     //Plus-symbol
-    if (e.target.parentNode.parentNode.className.indexOf('newtab') > -1) {
+    if (e.target.parentNode.className.indexOf('newtab') > -1) {
         initPaste();
         return;
     }
